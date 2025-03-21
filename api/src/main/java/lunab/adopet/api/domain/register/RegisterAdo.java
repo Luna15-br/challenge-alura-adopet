@@ -1,6 +1,7 @@
-package lunab.adopet.api.register;
+package domain.register;
 
 
+import domain.user.UserData;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -21,20 +22,22 @@ public class RegisterAdo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String email;
     private String cpf;
     private String tel;
+    @ManyToOne
+    @JoinColumn (name = "email", referencedColumnName = "login", nullable = false, unique = true)
+    private UserData user;
     @Embedded
     private Address address;
     private boolean active;
 
 
-    public RegisterAdo(@Valid DataRegister data) {
+    public RegisterAdo(@Valid RegisterDTO data, UserData user) {
         this.name = data.name();
-        this.email = data.email();
         this.cpf = data.cpf();
         this.tel = data.tel();
         this.address = new Address(data.address());
+        this.user = user;
         this.active = true;
     }
 }
