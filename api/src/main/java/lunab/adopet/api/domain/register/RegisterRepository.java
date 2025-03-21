@@ -1,4 +1,4 @@
-package domain.register;
+package lunab.adopet.api.domain.register;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

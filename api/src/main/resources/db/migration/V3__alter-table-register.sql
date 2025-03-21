@@ -1,0 +1,5 @@
+ALTER TABLE register
+DROP COLUMN email,
+ADD COLUMN user_login VARCHAR(255) NOT NULL UNIQUE,
+ADD CONSTRAINT fk_register_user FOREIGN KEY (user_login) REFERENCES user(login)
+ON UPDATE CASCADE;

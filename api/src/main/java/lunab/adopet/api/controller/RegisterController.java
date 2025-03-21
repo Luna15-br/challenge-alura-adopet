@@ -1,11 +1,16 @@
 package lunab.adopet.api.controller;
 
 
+import lunab.adopet.api.domain.RegisterRequest;
+import lunab.adopet.api.domain.register.RegisterDTO;
+import lunab.adopet.api.domain.user.AuthData;
+import lunab.adopet.api.domain.user.UserData;
+import lunab.adopet.api.domain.user.UserRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import lunab.adopet.api.register.DataRegister;
-import lunab.adopet.api.register.RegisterAdo;
-import lunab.adopet.api.register.RegisterRepository;
+import lunab.adopet.api.domain.register.RegisterAdo;
+import lunab.adopet.api.domain.register.RegisterRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,16 +26,24 @@ public class RegisterController {
 
     @Autowired
     private RegisterRepository registerRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @PostMapping
     @Transactional
-    public ResponseEntity register (@RequestBody @Valid DataRegister data) {
-        String email = data.email().toLowerCase(Locale.ROOT);
+    public ResponseEntity register(@RequestBody @Valid RegisterRequest registerRequest) {
 
-        var user = new RegisterAdo(data);
-        user.setEmail(email);
-        registerRepository.save(user);
+        RegisterDTO data = registerRequest.registerDTO();
+        AuthData authData = registerRequest.authData();
+
+        String email = authData.login().toLowerCase(Locale.ROOT);
+        var userLogin = new UserData(authData);
+        userLogin.setLogin(email);
+        userRepository.save(userLogin);
+        var userRegister = new RegisterAdo(data, authData);
+        registerRepository.save(userRegister);
+
         return ResponseEntity.ok().build();
     }
 

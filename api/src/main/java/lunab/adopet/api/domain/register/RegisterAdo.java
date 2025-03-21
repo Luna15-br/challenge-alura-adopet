@@ -1,14 +1,14 @@
-package domain.register;
+package lunab.adopet.api.domain.register;
 
 
-import domain.user.UserData;
+import lunab.adopet.api.domain.user.AuthData;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lunab.adopet.api.address.Address;
+import lunab.adopet.api.domain.address.Address;
+import lunab.adopet.api.domain.user.UserData;
 
 @Table(name = "register")
 @Entity
@@ -25,19 +25,19 @@ public class RegisterAdo {
     private String cpf;
     private String tel;
     @ManyToOne
-    @JoinColumn (name = "email", referencedColumnName = "login", nullable = false, unique = true)
+    @JoinColumn (name = "user_login", referencedColumnName = "login", nullable = false, unique = true)
     private UserData user;
     @Embedded
     private Address address;
     private boolean active;
 
 
-    public RegisterAdo(@Valid RegisterDTO data, UserData user) {
+    public RegisterAdo(RegisterDTO data, AuthData user) {
         this.name = data.name();
         this.cpf = data.cpf();
         this.tel = data.tel();
         this.address = new Address(data.address());
-        this.user = user;
+        this.user = new UserData(user);
         this.active = true;
     }
 }

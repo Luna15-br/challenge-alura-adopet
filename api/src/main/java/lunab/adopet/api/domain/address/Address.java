@@ -1,4 +1,4 @@
-package lunab.adopet.api.address;
+package lunab.adopet.api.domain.address;
 
 
 import jakarta.persistence.Embeddable;
@@ -6,12 +6,14 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Embeddable
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
     private String uf;

@@ -1,4 +1,4 @@
-package lunab.adopet.api.address;
+package lunab.adopet.api.domain.address;
 
 import jakarta.validation.constraints.NotBlank;
 

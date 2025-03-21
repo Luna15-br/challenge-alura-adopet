@@ -1,10 +1,10 @@
-package domain.user;
+package lunab.adopet.api.domain.user;
 
 
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name = "user-data")
+@Table(name = "user")
 @Entity
 @Getter
 @Setter
