@@ -1,4 +1,11 @@
 package lunab.adopet.api.address;
 
-public record DataAddress() {
+import jakarta.validation.constraints.NotBlank;
+
+public record DataAddress(
+        @NotBlank
+        String uf,
+        @NotBlank
+        String city
+) {
 }
