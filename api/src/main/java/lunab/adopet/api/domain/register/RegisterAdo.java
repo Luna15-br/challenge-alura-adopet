@@ -25,7 +25,7 @@ public class RegisterAdo {
     private String cpf;
     private String tel;
     @ManyToOne
-    @JoinColumn (name = "user_login", referencedColumnName = "login", nullable = false, unique = true)
+    @JoinColumn(name = "user_login", referencedColumnName = "login", nullable = false, unique = true)
     private UserData user;
     @Embedded
     private Address address;
