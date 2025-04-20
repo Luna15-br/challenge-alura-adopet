@@ -10,9 +10,10 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lunab.adopet.api.domain.register.RegisterAdo;
 import lunab.adopet.api.domain.register.RegisterRepository;
-import org.apache.catalina.User;
+import lunab.adopet.api.infra.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,8 @@ public class RegisterController {
     private RegisterRepository registerRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @PostMapping
@@ -36,14 +39,13 @@ public class RegisterController {
 
         RegisterDTO data = registerRequest.registerDTO();
         AuthData authData = registerRequest.authData();
-
         String email = authData.login().toLowerCase(Locale.ROOT);
         var userLogin = new UserData(authData);
         userLogin.setLogin(email);
+        userLogin.setPassword(passwordEncoder.encode(userLogin.getPassword()));
         userRepository.save(userLogin);
         var userRegister = new RegisterAdo(data, authData);
         registerRepository.save(userRegister);
-
         return ResponseEntity.ok().build();
     }
 
