@@ -38,8 +38,13 @@ public class AccountController {
         register.atualizarInfo(put);
         return ResponseEntity.ok(new RegisterViewDTO(register));
     }
+    @DeleteMapping
+    @Transactional
+    public ResponseEntity deleteUser () {
+        var authenticatedUser = (UserData) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var register = registerRepository.findByUser_Login(authenticatedUser.getUsername());
+        register.delete();
+        return ResponseEntity.noContent().build();
 
-
-
-
+    }
 }
