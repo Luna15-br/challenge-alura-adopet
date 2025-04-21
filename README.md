@@ -12,7 +12,7 @@
 - Spring Security + JWT (Autenticação e autorização)
 - Flyway (Migração de banco de dados)
 - MySQL (Banco de dados relacional)
-- Lombok (Redução de boilerplate code)
+- Lombok (Durante o projeto, lombok apresentou instabilidade e foi retirado.)
 - Thymeleaf (Template engine)
 - Swagger (Documentação interativa da API)
 
