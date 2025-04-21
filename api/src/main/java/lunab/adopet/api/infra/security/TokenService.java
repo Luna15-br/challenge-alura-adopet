@@ -19,7 +19,7 @@ public class TokenService {
     private String secret;
 
     private Instant dataExpiracao() {
-        return LocalDateTime.now().plusDays(1).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.of("-03:00"));
     }
 
     public String gerarToken(UserData user) {
