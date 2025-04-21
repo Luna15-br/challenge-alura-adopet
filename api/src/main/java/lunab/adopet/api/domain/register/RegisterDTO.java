@@ -15,5 +15,7 @@ public record RegisterDTO(
         @NotBlank
         @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}")
         String cpf,
-        @NotNull @Valid DataAddress address) {
+        @NotNull @Valid DataAddress address,
+        String descricao
+        ) {
 }
