@@ -30,6 +30,7 @@ public class RegisterAdo {
     @Embedded
     private Address address;
     private boolean active;
+    private String descricao;
 
     public RegisterAdo () {
 
@@ -42,6 +43,7 @@ public class RegisterAdo {
         this.address = new Address(data.address());
         this.user = new UserData(user);
         this.active = true;
+        this.descricao = data.descricao();
     }
 
     public Long getId() {
@@ -98,5 +100,27 @@ public class RegisterAdo {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    public void atualizarInfo (RegisterPut data) {
+        if(data.name() != null && data.name().length() <= 7) {
+            this.name = data.name();
+        }
+        if (data.tel() != null) {
+            this.tel = data.tel();
+        }
+        if (data.address() != null) {
+            this.address.atualizarEndereco(data.address());
+        }
+        if (data.descricao() != null) {
+            this.descricao = data.descricao();
+        }
     }
 }
