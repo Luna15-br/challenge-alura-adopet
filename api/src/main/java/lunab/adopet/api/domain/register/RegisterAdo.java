@@ -123,4 +123,8 @@ public class RegisterAdo {
             this.descricao = data.descricao();
         }
     }
+
+    public void delete() {
+        this.active = false;
+    }
 }
