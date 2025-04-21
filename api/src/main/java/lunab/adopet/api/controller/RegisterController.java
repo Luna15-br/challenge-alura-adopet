@@ -10,7 +10,6 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lunab.adopet.api.domain.register.RegisterAdo;
 import lunab.adopet.api.domain.register.RegisterRepository;
-import lunab.adopet.api.infra.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;

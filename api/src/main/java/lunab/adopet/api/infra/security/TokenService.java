@@ -7,7 +7,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import lunab.adopet.api.domain.user.UserData;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

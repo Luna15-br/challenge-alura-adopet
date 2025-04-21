@@ -1,7 +1,5 @@
 package lunab.adopet.api.domain.register;
 
-import lunab.adopet.api.domain.address.Address;
-
 public record RegisterViewDTO(
         Long id,
         String name,
