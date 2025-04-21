@@ -31,6 +31,9 @@ public class RegisterAdo {
     private Address address;
     private boolean active;
 
+    public RegisterAdo () {
+
+    }
 
     public RegisterAdo(RegisterDTO data, AuthData user) {
         this.name = data.name();
