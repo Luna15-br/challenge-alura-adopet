@@ -36,5 +36,14 @@ public class Address {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public void atualizarEndereco(DataAddress address) {
+        if(address.city() != null) {
+            this.city = address.city();
+        }
+        if(address.uf() != null) {
+            this.city = address.uf();
+        }
+    }
 }
 
