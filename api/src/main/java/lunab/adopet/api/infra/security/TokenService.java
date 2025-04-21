@@ -3,7 +3,6 @@ package lunab.adopet.api.infra.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lunab.adopet.api.domain.user.UserData;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,8 +19,9 @@ public class TokenService {
     private String secret;
 
     private Instant dataExpiracao() {
-        return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusDays(1).toInstant(ZoneOffset.of("-03:00"));
     }
+
     public String gerarToken(UserData user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
@@ -34,6 +34,7 @@ public class TokenService {
             throw new RuntimeException("Erro ao gerar o token", e);
         }
     }
+
     public String getSubject(String tokenJWT) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
@@ -42,8 +43,9 @@ public class TokenService {
                     .build()
                     .verify(tokenJWT);
             return decodedJWT.getSubject();
-        } catch (JWTVerificationException e) {
-            throw new RuntimeException("Token JWT inválido ou expirado!");
+        } catch (Exception e) {
+            System.out.println("ERRO NA VALIDAÇÃO: " + e.getMessage());
+            throw e;
         }
     }
 }
